@@ -37,3 +37,26 @@ const calcular = () => {
   tagResult.innerHTML = resultado;
 };
 
+//intentando implementar la grafica
+let array = []
+async function getDataLastDay(api) {
+  try {
+    const res = await fetch(api);
+    const data = await res.json();
+    return array = data.serie.map(x => x.valor).slice(0,9)
+  } catch (e) {
+    console.log(e.message);
+  }
+}
+
+async function renderGrafica() {
+  const data = await getDataLastDay('https://mindicador.cl/api/dolar/');
+  const config = {
+    type: String,
+    array
+  }
+  const myChart = document.getElementById("myChart");
+  new Chart(myChart, config);
+  }
+
+///////////////////////////////////////////////////////////////////////////////
